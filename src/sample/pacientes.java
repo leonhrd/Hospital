@@ -16,13 +16,14 @@ import javafx.stage.Stage;
 public class pacientes extends Stage implements EventHandler {
 
     private HBox hBox;
-    private VBox vBox;
+    private VBox vBox, vBox2;
 
-    private Label clave, nombre, sexo;
-    private Label cveNomina, nss, Cedula, salario;
-    private TextArea clavText, nombText, sexoText;
-    private TextArea cveNominaText, nssText, CedulaText, salarioText;
-    private Button Anadir;
+    private Label nss, nombre, sexo;
+    private Label Idpaciente, FechaNac, IdHist, IdPlanta,cveRehab;
+
+    private TextArea nssText, nombText, sexoText;
+    private TextArea IdpacienteText, FechaNacText, IdHistText, IdPlantaText,cveRehabText;
+    private Button Anadir,DarAlta;
     private TableView tabla;
 
     private Scene escena;
@@ -30,10 +31,10 @@ public class pacientes extends Stage implements EventHandler {
 
     public pacientes() {
         crearInterfaz();
-        this.setTitle("Doctores de Hospital ");
+        this.setTitle("Pacientes");
         this.setScene(escena);
 
-        Image logo = new Image("Images/equipoMedico.png");
+        Image logo = new Image("Images/examen.png");
 
         this.getIcons().add(logo);
         this.show();
@@ -43,87 +44,115 @@ public class pacientes extends Stage implements EventHandler {
     private void crearInterfaz() {
         vBox = new VBox();
         hBox = new HBox();
+        vBox2 = new VBox();
 
-        clave = new Label();
+        nss = new Label();
         nombre = new Label();
         sexo = new Label();
-        cveNomina = new Label();
-        nss = new Label();
-        Cedula = new Label();
-        salario = new Label();
+        Idpaciente = new Label();
+        FechaNac = new Label();
+        IdHist = new Label();
+        IdPlanta = new Label();
+        cveRehab = new Label();
 
-        clavText = new TextArea();
+        nssText = new TextArea();
         nombText = new TextArea();
         sexoText = new TextArea();
-        cveNominaText = new TextArea();
-        nssText = new TextArea();
-        CedulaText = new TextArea();
-        salarioText = new TextArea();
+        IdpacienteText = new TextArea();
+        FechaNacText = new TextArea();
+        IdHistText = new TextArea();
+        IdPlantaText = new TextArea();
+        cveRehabText = new TextArea();
 
-        clavText.setMaxSize(250, 1);
-        nombText.setMaxSize(250, 1);
-        sexoText.setMaxSize(250, 1);
-        cveNominaText.setMaxSize(250, 1);
-        nssText.setMaxSize(250, 1);
-        CedulaText.setMaxSize(250, 1);
-        salarioText.setMaxSize(250, 1);
+        nssText.setMaxSize(150, 1);
+        nombText.setMaxSize(150, 1);
+        sexoText.setMaxSize(150, 1);
+        IdpacienteText.setMaxSize(150, 1);
+        FechaNacText.setMaxSize(150, 1);
+        IdPlantaText.setMaxSize(150, 1);
+        IdHistText.setMaxSize(150, 1);
+        cveRehabText.setMaxSize(150, 1);
 
-        clave.setText("Clave");
+        nss.setText("Número de Seguridad Social");
         nombre.setText("Nombre");
         sexo.setText("Sexo");
-        cveNomina.setText("Nomina");
-        nss.setText("nss");
-        Cedula.setText("Cedula");
-        salario.setText("Salario");
+        Idpaciente.setText("Numero de Identificacion");
+        FechaNac.setText("Fecha de nacimiento --/--/--");
+        IdHist.setText("Identificador historial medico");
+        IdPlanta.setText("Numero de planta");
+        cveRehab.setText("Clave de rehabilitacion");
 
         tabla = new TableView();
-        tabla.setMaxSize(650, 350);
+        tabla.setMaxSize(800, 350);
         tabla.setEditable(true);
 
-        TableColumn<doctores, String> claveTabla = new TableColumn("Clave");
-        claveTabla.setCellValueFactory(new PropertyValueFactory<>("Clave"));
-        tabla.getColumns().addAll(claveTabla);
+        TableColumn<pacientes, String> nssTabla = new TableColumn("nss");
+        nssTabla.setCellValueFactory(new PropertyValueFactory<>("nss"));
+        tabla.getColumns().addAll(nssTabla);
 
-        TableColumn<doctores, String> nombreTabla = new TableColumn("Nombre");
-        nombreTabla.setCellValueFactory(new PropertyValueFactory<>("Clave"));
-        tabla.getColumns().addAll(nombreTabla);
+        TableColumn<pacientes, String> nombreTabla = new TableColumn("Nombre");
+        nombreTabla .setCellValueFactory(new PropertyValueFactory<>("Nombre"));
+        tabla.getColumns().addAll(nombreTabla );
 
-        TableColumn<doctores, String> sexoTabla = new TableColumn("Sexo");
-        sexoTabla.setCellValueFactory(new PropertyValueFactory<>("Sexo"));
+        TableColumn<pacientes, String> sexoTabla  = new TableColumn("Sexo");
+        sexoTabla .setCellValueFactory(new PropertyValueFactory<>("Sexo"));
         tabla.getColumns().addAll(sexoTabla);
 
-        TableColumn<doctores, String> NominaTabla = new TableColumn("Nomina");
-        NominaTabla .setCellValueFactory(new PropertyValueFactory<>("Nomina"));
-        tabla.getColumns().addAll(NominaTabla );
+        TableColumn<pacientes, String> IdPacienteTabla  = new TableColumn("Id.Paciente");
+        IdPacienteTabla .setCellValueFactory(new PropertyValueFactory<>("Id.Paciente"));
+        tabla.getColumns().addAll(IdPacienteTabla);
 
-        TableColumn<doctores, String> nssTabla = new TableColumn("nss");
-        nssTabla .setCellValueFactory(new PropertyValueFactory<>("nss"));
-        tabla.getColumns().addAll(nssTabla );
+        TableColumn<pacientes, String> FechaNacTabla  = new TableColumn("F.Nacimiento");
+        FechaNacTabla  .setCellValueFactory(new PropertyValueFactory<>("F.Nacimiento"));
+        tabla.getColumns().addAll(FechaNacTabla );
 
-        TableColumn<doctores, String> cedulaTabla = new TableColumn("Cedula");
-        cedulaTabla.setCellValueFactory(new PropertyValueFactory<>("Cedula"));
-        tabla.getColumns().addAll(cedulaTabla);
+        TableColumn<pacientes, String> HistorialTabla  = new TableColumn("Historial");
+        HistorialTabla  .setCellValueFactory(new PropertyValueFactory<>("Historial"));
+        tabla.getColumns().addAll(HistorialTabla );
 
-        TableColumn<doctores, String> salarioTabla = new TableColumn("Salario");
-        salarioTabla.setCellValueFactory(new PropertyValueFactory<>("Salario"));
-        tabla.getColumns().addAll(salarioTabla);
+        TableColumn<pacientes, String> PlantaTabla  = new TableColumn("Planta");
+        PlantaTabla  .setCellValueFactory(new PropertyValueFactory<>("Historial"));
+        tabla.getColumns().addAll(PlantaTabla );
 
-        hBox.setPadding(new Insets(60));
-        //vBox.setPadding(new Insets(50));
+        TableColumn<pacientes, String> cveRehabTabla  = new TableColumn("Rehabilitacion");
+        cveRehabTabla .setCellValueFactory(new PropertyValueFactory<>("Rehabilitacion"));
+        tabla.getColumns().addAll(cveRehabTabla );
+
+
+
+
+        hBox.setPadding(new Insets(10));
 
         Anadir = new Button();
-        Anadir.setText("Registrar Doctor");
-        Anadir.setPadding(new Insets(20));
-        Anadir.setMaxSize(160,10);
-
-        vBox.getChildren().addAll(clave, clavText, nombre, nombText, sexo, sexoText, cveNomina, cveNominaText, nss, nssText, Cedula, CedulaText, salario, salarioText, Anadir);
-        hBox.setPadding(new Insets(15));
-
-        hBox.getChildren().addAll(vBox, tabla);
+        Anadir.setText("Ingresar Paciente");
+        Anadir.setPadding(new Insets(5));
+        Anadir.setMaxSize(300,1);
+        Anadir.setOnAction(event -> {                 });
 
 
 
-        escena = new Scene(hBox, 1280, 480);
+        DarAlta = new Button();
+        DarAlta.setText("Dar de alta ");
+        DarAlta.setPadding(new Insets(1));
+        DarAlta.setMaxSize(300,1);
+        DarAlta.setOnAction(event1 -> {                  });
+
+        vBox2.getChildren().addAll(Anadir,DarAlta);
+        //vBox2.setSpacing(1);
+
+        vBox.getChildren().addAll(nss,nssText, nombre,nombText,sexo,sexoText,Idpaciente,IdpacienteText,FechaNac,FechaNacText,IdHist,IdHistText,IdPlanta,IdPlantaText,cveRehab,cveRehabText);
+
+        vBox.setSpacing(5);
+        vBox2.setSpacing(10);
+        hBox.setSpacing(5);
+        //hBox.setPadding(new Insets(15));
+
+        hBox.getChildren().addAll(vBox, tabla, vBox2);
+
+
+
+
+        escena = new Scene(hBox, 1000, 650);
 
     }
 
