@@ -114,16 +114,18 @@ public class doctores extends Stage implements EventHandler {
         Anadir = new Button();
         Anadir.setText("Registrar Doctor");
         Anadir.setPadding(new Insets(20));
-        Anadir.setMaxSize(160,10);
+        Anadir.setMaxSize(350,10);
 
         vBox.getChildren().addAll(clave, clavText, nombre, nombText, sexo, sexoText, cveNomina, cveNominaText, nss, nssText, Cedula, CedulaText, salario, salarioText, Anadir);
+        vBox.setSpacing(5);
+        hBox.setSpacing(10);
         hBox.setPadding(new Insets(15));
 
         hBox.getChildren().addAll(vBox, tabla);
 
 
 
-        escena = new Scene(hBox, 1280, 480);
+        escena = new Scene(hBox, 1280, 600);
 
     }
 
