@@ -1,0 +1,6 @@
+.root{
+    -fx-background-image: url("src/sample/Images/hospitalfondoJPG.jpeg");
+    -fx-background-repeat:<repeat-style>;
+    -fx-background-size: 1920 1080;
+    -fx-background-position: center;
+}
