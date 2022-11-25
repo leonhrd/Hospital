@@ -1,6 +1,5 @@
 package sample;
 
-import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -34,7 +33,7 @@ public class pacientes extends Stage implements EventHandler {
         this.setTitle("Pacientes");
         this.setScene(escena);
 
-        Image logo = new Image("Images/examen.png");
+        Image logo = new Image("sample/Images/examen.png");
 
         this.getIcons().add(logo);
         this.show();

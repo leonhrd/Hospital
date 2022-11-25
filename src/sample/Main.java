@@ -28,6 +28,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
+
+
         vBox=new VBox();
         MenuBarras = new MenuBar();
         //Menus en la barra de menus
@@ -55,12 +57,15 @@ public class Main extends Application {
 
 
 
-        Scene escena = new Scene (vBox,1280,720);
+       Scene escena = new Scene (vBox,1280,720);
 
-        Image logo = new Image("Images/logodehospital.png");
+        Image logo = new Image("sample/Images/logodehospital.png");
         primaryStage.getIcons().add(logo);
-        primaryStage.setScene(escena);
+      //  escena.getStylesheets().add(getClass().getResource("src/sample/css/styles.css").toExternalForm());
+
+
         primaryStage.setTitle("Hospital ");
+        primaryStage.setScene(escena);
 
         primaryStage.show();
          ;
@@ -85,3 +90,6 @@ public class Main extends Application {
         launch(args);
     }
 }
+
+
+
