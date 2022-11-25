@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sample.models.conexion;
 
 
 
@@ -22,6 +23,7 @@ public class Main extends Application {
     private MenuItem ingDoc;
     private MenuItem regrPaciente;
     private HBox hBox;
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -66,8 +68,8 @@ public class Main extends Application {
         primaryStage.setScene(escena);
 
         primaryStage.show();
-        ;
-
+         ;
+        conexion.crearConexion();
     }
 
     private void EventosDoctores(int i){
