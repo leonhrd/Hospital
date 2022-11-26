@@ -10,18 +10,20 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sample.models.PacientesDAO;
+
 
 
 public class pacientes extends Stage implements EventHandler {
 
     private HBox hBox;
     private VBox vBox, vBox2;
-
+    private PacientesDAO pDAO;
     private Label nss, nombre, sexo;
-    private Label Idpaciente, FechaNac, IdHist, IdPlanta,cveRehab;
+    private Label Idpaciente, FechaNac, IdHist, IdPlanta,cveRehab,IdCuarto,IdCama;
 
     private TextArea nssText, nombText, sexoText;
-    private TextArea IdpacienteText, FechaNacText, IdHistText, IdPlantaText,cveRehabText;
+    private TextArea IdpacienteText, FechaNacText, IdHistText, IdPlantaText,cveRehabText,IdCuartoText,IdCamaText;
     private Button Anadir,DarAlta;
     private TableView tabla;
 
@@ -29,6 +31,7 @@ public class pacientes extends Stage implements EventHandler {
 
 
     public pacientes() {
+        pDAO = new PacientesDAO();
         crearInterfaz();
         this.setTitle("Pacientes");
         this.setScene(escena);
@@ -53,6 +56,8 @@ public class pacientes extends Stage implements EventHandler {
         IdHist = new Label();
         IdPlanta = new Label();
         cveRehab = new Label();
+        IdCuarto = new Label();
+        IdCama = new Label();
 
         nssText = new TextArea();
         nombText = new TextArea();
@@ -62,6 +67,8 @@ public class pacientes extends Stage implements EventHandler {
         IdHistText = new TextArea();
         IdPlantaText = new TextArea();
         cveRehabText = new TextArea();
+        IdCuartoText = new TextArea();
+        IdCamaText = new TextArea();
 
         nssText.setMaxSize(150, 1);
         nombText.setMaxSize(150, 1);
@@ -71,6 +78,8 @@ public class pacientes extends Stage implements EventHandler {
         IdPlantaText.setMaxSize(150, 1);
         IdHistText.setMaxSize(150, 1);
         cveRehabText.setMaxSize(150, 1);
+        IdCuartoText.setMaxSize(150,1);
+        IdCamaText.setMaxSize(150,1);
 
         nss.setText("Número de Seguridad Social");
         nombre.setText("Nombre");
@@ -80,44 +89,53 @@ public class pacientes extends Stage implements EventHandler {
         IdHist.setText("Identificador historial medico");
         IdPlanta.setText("Numero de planta");
         cveRehab.setText("Clave de rehabilitacion");
+        IdCuarto.setText("Numero de cuarto");
+        IdCama.setText("Numero de cama");
 
         tabla = new TableView();
         tabla.setMaxSize(800, 350);
         tabla.setEditable(true);
 
-        TableColumn<pacientes, String> nssTabla = new TableColumn("nss");
-        nssTabla.setCellValueFactory(new PropertyValueFactory<>("nss"));
+        TableColumn<PacientesDAO, String> nssTabla = new TableColumn("NSS");
+        nssTabla.setCellValueFactory(new PropertyValueFactory<>("NSS"));
         tabla.getColumns().addAll(nssTabla);
 
-        TableColumn<pacientes, String> nombreTabla = new TableColumn("Nombre");
+        TableColumn<PacientesDAO, String> nombreTabla = new TableColumn("Nombre");
         nombreTabla .setCellValueFactory(new PropertyValueFactory<>("Nombre"));
         tabla.getColumns().addAll(nombreTabla );
 
-        TableColumn<pacientes, String> sexoTabla  = new TableColumn("Sexo");
+        TableColumn<PacientesDAO, String> sexoTabla  = new TableColumn("Sexo");
         sexoTabla .setCellValueFactory(new PropertyValueFactory<>("Sexo"));
         tabla.getColumns().addAll(sexoTabla);
 
-        TableColumn<pacientes, String> IdPacienteTabla  = new TableColumn("Id.Paciente");
-        IdPacienteTabla .setCellValueFactory(new PropertyValueFactory<>("Id.Paciente"));
+        TableColumn<PacientesDAO, String> IdPacienteTabla  = new TableColumn("IdPaci");
+        IdPacienteTabla .setCellValueFactory(new PropertyValueFactory<>("IdPaci"));
         tabla.getColumns().addAll(IdPacienteTabla);
 
-        TableColumn<pacientes, String> FechaNacTabla  = new TableColumn("F.Nacimiento");
-        FechaNacTabla  .setCellValueFactory(new PropertyValueFactory<>("F.Nacimiento"));
+        TableColumn<PacientesDAO, String> FechaNacTabla  = new TableColumn("FNacimiento");
+        FechaNacTabla  .setCellValueFactory(new PropertyValueFactory<>("FNacimiento"));
         tabla.getColumns().addAll(FechaNacTabla );
 
-        TableColumn<pacientes, String> HistorialTabla  = new TableColumn("Historial");
-        HistorialTabla  .setCellValueFactory(new PropertyValueFactory<>("Historial"));
+        TableColumn<PacientesDAO, String> HistorialTabla  = new TableColumn("IdHist");
+        HistorialTabla  .setCellValueFactory(new PropertyValueFactory<>("IdHist"));
         tabla.getColumns().addAll(HistorialTabla );
 
-        TableColumn<pacientes, String> PlantaTabla  = new TableColumn("Planta");
-        PlantaTabla  .setCellValueFactory(new PropertyValueFactory<>("Historial"));
+        TableColumn<PacientesDAO, String> PlantaTabla  = new TableColumn("IdPlanta");
+        PlantaTabla  .setCellValueFactory(new PropertyValueFactory<>("IdPlanta"));
         tabla.getColumns().addAll(PlantaTabla );
 
-        TableColumn<pacientes, String> cveRehabTabla  = new TableColumn("Rehabilitacion");
-        cveRehabTabla .setCellValueFactory(new PropertyValueFactory<>("Rehabilitacion"));
+        TableColumn<PacientesDAO, String> cveRehabTabla  = new TableColumn("CveRehab");
+        cveRehabTabla .setCellValueFactory(new PropertyValueFactory<>("CveRehab"));
         tabla.getColumns().addAll(cveRehabTabla );
 
+        TableColumn<PacientesDAO, String> CuartoTabla  = new TableColumn("IdCuarto");
+        CuartoTabla .setCellValueFactory(new PropertyValueFactory<>("IdCuarto"));
+        tabla.getColumns().addAll(CuartoTabla );
 
+        TableColumn<PacientesDAO, String> CamaTabla  = new TableColumn("IdCama");
+        CamaTabla .setCellValueFactory(new PropertyValueFactory<>("IdCama"));
+        tabla.getColumns().addAll(CamaTabla );
+        tabla.setItems(pDAO.SELECCIONAR());
 
 
         hBox.setPadding(new Insets(10));
@@ -139,7 +157,7 @@ public class pacientes extends Stage implements EventHandler {
         vBox2.getChildren().addAll(Anadir,DarAlta);
         //vBox2.setSpacing(1);
 
-        vBox.getChildren().addAll(nss,nssText, nombre,nombText,sexo,sexoText,Idpaciente,IdpacienteText,FechaNac,FechaNacText,IdHist,IdHistText,IdPlanta,IdPlantaText,cveRehab,cveRehabText);
+        vBox.getChildren().addAll(nss,nssText, nombre,nombText,sexo,sexoText,Idpaciente,IdpacienteText,FechaNac,FechaNacText,IdHist,IdHistText,IdPlanta,IdPlantaText,cveRehab,cveRehabText,IdCama,IdCamaText,IdCuarto,IdCuartoText);
 
         vBox.setSpacing(5);
         vBox2.setSpacing(10);
@@ -151,7 +169,7 @@ public class pacientes extends Stage implements EventHandler {
 
 
 
-        escena = new Scene(hBox, 1000, 650);
+        escena = new Scene(hBox, 1300, 650);
 
     }
 
