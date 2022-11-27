@@ -12,24 +12,24 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
-public class doctores extends Stage implements EventHandler {
+public class terapeuta extends Stage implements EventHandler {
 
     private HBox hBox;
     private VBox vBox;
 
     private Label clave, nombre, sexo, especialidad;
-    private Label cveNomina, nss, Cedula, salario;
-    private TextArea clavText, nombText, sexoText;
-    private TextArea cveNominaText, nssText, CedulaText, salarioText, especiText;
+
+    private TextArea clavText, nombText, sexoText, espText;
+
     private Button Anadir;
     private TableView tabla;
 
     private Scene escena;
 
 
-    public doctores() {
+    public terapeuta() {
         crearInterfaz();
-        this.setTitle("Doctores de Hospital ");
+        this.setTitle("Terapeutas de Hospital ");
         this.setScene(escena);
 
         Image logo = new Image("sample/Images/equipoMedico.png");
@@ -46,38 +46,30 @@ public class doctores extends Stage implements EventHandler {
         clave = new Label();
         nombre = new Label();
         sexo = new Label();
-        cveNomina = new Label();
         especialidad = new Label();
-        nss = new Label();
-        Cedula = new Label();
-        salario = new Label();
+
 
         clavText = new TextArea();
         nombText = new TextArea();
         sexoText = new TextArea();
-        cveNominaText = new TextArea();
-        especiText = new TextArea();
-        nssText = new TextArea();
-        CedulaText = new TextArea();
-        salarioText = new TextArea();
+        espText= new TextArea();
+
+
+
 
         clavText.setMaxSize(250, 1);
         nombText.setMaxSize(250, 1);
         sexoText.setMaxSize(250, 1);
-        cveNominaText.setMaxSize(250, 1);
-        especiText.setMaxSize(250,1);
-        nssText.setMaxSize(250, 1);
-        CedulaText.setMaxSize(250, 1);
-        salarioText.setMaxSize(250, 1);
+
+        espText.setMaxSize(250,1);
+
 
         clave.setText("Clave");
         nombre.setText("Nombre");
         sexo.setText("Sexo");
-        cveNomina.setText("Nomina");
+
         especialidad.setText("Especialidad");
-        nss.setText("nss");
-        Cedula.setText("Cedula");
-        salario.setText("Salario");
+
 
         tabla = new TableView();
         tabla.setMaxSize(650, 350);
@@ -95,35 +87,21 @@ public class doctores extends Stage implements EventHandler {
         sexoTabla.setCellValueFactory(new PropertyValueFactory<>("Sexo"));
         tabla.getColumns().addAll(sexoTabla);
 
-        TableColumn<doctores, String> NominaTabla = new TableColumn("Nomina");
-        NominaTabla .setCellValueFactory(new PropertyValueFactory<>("Nomina"));
-        tabla.getColumns().addAll(NominaTabla );
-
         TableColumn<doctores, String> EspecTabla = new TableColumn("Especialidad");
         EspecTabla .setCellValueFactory(new PropertyValueFactory<>("Especilidad"));
         tabla.getColumns().addAll(EspecTabla );
 
-        TableColumn<doctores, String> nssTabla = new TableColumn("nss");
-        nssTabla .setCellValueFactory(new PropertyValueFactory<>("nss"));
-        tabla.getColumns().addAll(nssTabla );
 
-        TableColumn<doctores, String> cedulaTabla = new TableColumn("Cedula");
-        cedulaTabla.setCellValueFactory(new PropertyValueFactory<>("Cedula"));
-        tabla.getColumns().addAll(cedulaTabla);
-
-        TableColumn<doctores, String> salarioTabla = new TableColumn("Salario");
-        salarioTabla.setCellValueFactory(new PropertyValueFactory<>("Salario"));
-        tabla.getColumns().addAll(salarioTabla);
 
         hBox.setPadding(new Insets(60));
         //vBox.setPadding(new Insets(50));
 
         Anadir = new Button();
-        Anadir.setText("Registrar Doctor");
+        Anadir.setText("Registrar Terapeuta");
         Anadir.setPadding(new Insets(20));
         Anadir.setMaxSize(350,10);
 
-        vBox.getChildren().addAll(clave, clavText, nombre, nombText, sexo, sexoText, cveNomina, cveNominaText, especialidad, especiText, nss, nssText, Cedula, CedulaText, salario, salarioText, Anadir);
+        vBox.getChildren().addAll(clave, clavText, nombre, nombText, sexo, sexoText, especialidad, espText, Anadir);
         vBox.setSpacing(5);
         hBox.setSpacing(10);
         hBox.setPadding(new Insets(15));
@@ -132,7 +110,7 @@ public class doctores extends Stage implements EventHandler {
 
 
 
-        escena = new Scene(hBox, 1000, 600);
+        escena = new Scene(hBox, 600, 600);
 
     }
 

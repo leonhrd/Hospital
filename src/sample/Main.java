@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import sample.models.conexion;
+//import sample.models.conexion;
 
 
 
@@ -19,9 +19,11 @@ public class Main extends Application {
 
     private VBox vBox;
     private MenuBar MenuBarras;
-    private Menu Doctores, Pacientes, Cirugias, Habitacion;
-    private MenuItem ingDoc;
-    private MenuItem regrPaciente;
+    private Menu Doctores, Pacientes, Cirugias, Habitacion, Puestos;
+    private MenuItem ingDoc, ingTer;
+    private MenuItem regrPaciente, rehbPacientes;
+    private MenuItem Cargos, Turnos;
+
     private HBox hBox;
 
 
@@ -37,20 +39,38 @@ public class Main extends Application {
         Pacientes = new Menu("Pacientes");
         Cirugias = new Menu("Cirugias");
         Habitacion = new Menu("Habitaciones");
+        Puestos = new Menu("Cargos y Turnos");
+
 
         //Aquí agregamos los botones a la barra de menu
-        MenuBarras.getMenus().addAll(Doctores, Pacientes,Cirugias, Habitacion );
+        MenuBarras.getMenus().addAll(Doctores, Pacientes,Cirugias, Habitacion, Puestos);
 
         ingDoc = new MenuItem("Añadir doctores");
         ingDoc.setOnAction(event -> EventosDoctores(1));
 
+        ingTer = new MenuItem("Añadir Terapeuta");
+        ingTer.setOnAction(event -> EventosDoctores(2));
+
         regrPaciente = new MenuItem("Registrar paciente");
         regrPaciente.setOnAction(event -> EventosPacientes(1));
+        rehbPacientes = new MenuItem("Pacientes en rehabilitacion");
+        rehbPacientes.setOnAction(event -> EventosPacientes(2));
+
+        Cargos = new MenuItem("Cargo");
+        Cargos.setOnAction(event -> EventosPuestos(1));
+        Turnos = new MenuItem("Turnos");
+       Turnos.setOnAction(event -> EventosPuestos(2));
 
 
 
-        Doctores.getItems().addAll(ingDoc);
-        Pacientes.getItems().addAll(regrPaciente);
+
+
+
+
+        Doctores.getItems().addAll(ingDoc, ingTer);
+        Pacientes.getItems().addAll(regrPaciente,rehbPacientes);
+        Puestos.getItems().addAll(Cargos,Turnos);
+
 
         //Aquí se agrega todo al vBox
         vBox.getChildren().addAll(MenuBarras);
@@ -69,20 +89,30 @@ public class Main extends Application {
 
         primaryStage.show();
          ;
-        conexion.crearConexion();
+       // conexion.crearConexion();
     }
 
     private void EventosDoctores(int i){
         switch (i){
             case 1: new doctores(); break;
+            case 2: new terapeuta(); break;
         }
     }
 
     private void EventosPacientes(int i){
         switch (i){
             case 1: new pacientes(); break;
+            case 2: new rehabilitacion();break;
         }
 
+    }
+
+    private void EventosPuestos(int i){
+        switch (i)
+        {
+            case 1:new puestos(); break;
+            case 2: new Turnos(); break;
+        }
     }
 
 
