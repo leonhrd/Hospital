@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sample.models.conexion;
 //import sample.models.conexion;
 
 
@@ -23,6 +24,8 @@ public class Main extends Application {
     private MenuItem ingDoc, ingTer;
     private MenuItem regrPaciente, rehbPacientes;
     private MenuItem Cargos, Turnos;
+    private MenuItem ProCirug;
+    private MenuItem habitaciones;
 
     private HBox hBox;
 
@@ -61,6 +64,13 @@ public class Main extends Application {
         Turnos = new MenuItem("Turnos");
        Turnos.setOnAction(event -> EventosPuestos(2));
 
+       ProCirug = new MenuItem("Programar cirugía");
+       ProCirug.setOnAction(event -> EventosCirugia(1));
+
+        habitaciones = new MenuItem("Ver habitaciones");
+        habitaciones.setOnAction(event -> EventosHabitacion(1));
+
+
 
 
 
@@ -70,6 +80,8 @@ public class Main extends Application {
         Doctores.getItems().addAll(ingDoc, ingTer);
         Pacientes.getItems().addAll(regrPaciente,rehbPacientes);
         Puestos.getItems().addAll(Cargos,Turnos);
+        Cirugias.getItems().addAll(ProCirug);
+        Habitacion.getItems().addAll(habitaciones);
 
 
         //Aquí se agrega todo al vBox
@@ -88,8 +100,9 @@ public class Main extends Application {
         primaryStage.setScene(escena);
 
         primaryStage.show();
-         ;
-       // conexion.crearConexion();
+
+
+        conexion.crearConexion();
     }
 
     private void EventosDoctores(int i){
@@ -112,6 +125,19 @@ public class Main extends Application {
         {
             case 1:new puestos(); break;
             case 2: new Turnos(); break;
+        }
+    }
+
+    private void EventosCirugia(int i){
+        switch (i)
+        {
+            case 1: new cirugia();break;
+        }
+    }
+
+    private void EventosHabitacion(int i ){
+        switch (i){
+            case 1:new habitaciones(); break;
         }
     }
 
