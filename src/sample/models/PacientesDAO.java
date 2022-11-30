@@ -98,7 +98,7 @@ public class PacientesDAO {
     }
 
     public void INSERTAR(){
-        String query = "INSERT INTO Paciente VALUES('"+this.NSS+"',"+this.IdPaci+","+this.Nombre+","+this.FNacimiento+","+this.Sexo+","+IdHist+","+IdPlanta+","+CveRehab+","+IdCuarto+","+IdCama+")";
+        String query = "INSERT INTO Paciente VALUES('"+this.NSS+"',"+this.IdPaci+",'"+this.Nombre+"','"+this.FNacimiento+"','"+this.Sexo+"',"+IdHist+","+IdPlanta+","+CveRehab+","+IdCuarto+","+IdCama+")";
         try {
             Statement stmt = conexion.conexion.createStatement();
             stmt.executeUpdate(query);

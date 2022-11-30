@@ -10,7 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
+import sample.models.CargoDAO;
 
 
 
@@ -22,8 +22,10 @@ import javafx.stage.Stage;
         private VBox vBox;
         private Scene escena;
         private TableView tabla;
+        private CargoDAO cDAO;
 
         public puestos(){
+            cDAO = new CargoDAO();
             creaInterfaz();
 
             this.setTitle("Cargos ");
@@ -46,12 +48,13 @@ import javafx.stage.Stage;
             tabla.setEditable(true);
 
             TableColumn<doctores, String> claveTabla = new TableColumn("CveCargo");
-            claveTabla.setCellValueFactory(new PropertyValueFactory<>("Clave"));
+            claveTabla.setCellValueFactory(new PropertyValueFactory<>("CveCargo"));
             tabla.getColumns().addAll(claveTabla);
 
             TableColumn<doctores, String> DescTabla = new TableColumn("Descripcion");
-            DescTabla.setCellValueFactory(new PropertyValueFactory<>("Clave"));
+            DescTabla.setCellValueFactory(new PropertyValueFactory<>("Descr"));
             tabla.getColumns().addAll( DescTabla);
+            tabla.setItems(cDAO.SELECCIONAR());
 
 
 

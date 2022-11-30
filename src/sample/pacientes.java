@@ -144,7 +144,21 @@ public class pacientes extends Stage implements EventHandler {
         Anadir.setText("Ingresar Paciente");
         Anadir.setPadding(new Insets(5));
         Anadir.setMaxSize(300,1);
-        Anadir.setOnAction(event -> {                 });
+        Anadir.setOnAction(event -> {
+            pDAO.setNSS(Integer.parseInt(this.nssText.getText()));
+            pDAO.setNombre(this.nombText.getText());
+            pDAO.setSexo(this.sexoText.getText());
+            pDAO.setIdPaci(Integer.parseInt(this.IdpacienteText.getText()));
+            pDAO.setFNacimiento(this.FechaNacText.getText());
+            pDAO.setIdHist(Integer.parseInt(this.IdHistText.getText()));
+            pDAO.setIdPlanta(Integer.parseInt(this.IdPlantaText.getText()));
+            pDAO.setCveRehab(Integer.parseInt(this.cveRehabText.getText()));
+            pDAO.setIdCuarto(Integer.parseInt(this.IdCuartoText.getText()));
+            pDAO.setIdCama(Integer.parseInt(this.IdCamaText.getText()));
+            pDAO.INSERTAR();
+            tabla.setItems(pDAO.SELECCIONAR());
+            tabla.refresh();
+        });
 
 
 
