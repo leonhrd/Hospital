@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sample.models.TurnoDAO;
 
 
 public class Turnos extends Stage implements EventHandler {
@@ -17,8 +18,10 @@ public class Turnos extends Stage implements EventHandler {
     private VBox vBox;
     private Scene escena;
     private TableView tabla;
+    private TurnoDAO tDAO;
 
     public Turnos() {
+        tDAO = new TurnoDAO();
         creaInterfaz();
 
         this.setTitle("Turnos ");
@@ -41,12 +44,14 @@ public class Turnos extends Stage implements EventHandler {
         tabla.setEditable(true);
 
         TableColumn<doctores, String> claveTabla = new TableColumn("Clave del turno");
-        claveTabla.setCellValueFactory(new PropertyValueFactory<>("Clave"));
+        claveTabla.setCellValueFactory(new PropertyValueFactory<>("CveTurno"));
         tabla.getColumns().addAll(claveTabla);
 
         TableColumn<doctores, String> DescTabla = new TableColumn("Descripcion");
-        DescTabla.setCellValueFactory(new PropertyValueFactory<>("Clave"));
+        DescTabla.setCellValueFactory(new PropertyValueFactory<>("Descr"));
         tabla.getColumns().addAll(DescTabla);
+        tabla.setItems(tDAO.SELECCIONAR());
+
 
 
         vBox.getChildren().addAll(tabla);
