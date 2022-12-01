@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sample.models.TerapeutaDAO;
 
 
 public class terapeuta extends Stage implements EventHandler {
@@ -23,11 +24,13 @@ public class terapeuta extends Stage implements EventHandler {
 
     private Button Anadir;
     private TableView tabla;
+    private TerapeutaDAO tDAO;
 
     private Scene escena;
 
 
     public terapeuta() {
+        tDAO = new TerapeutaDAO();
         crearInterfaz();
         this.setTitle("Terapeutas de Hospital ");
         this.setScene(escena);
@@ -76,11 +79,11 @@ public class terapeuta extends Stage implements EventHandler {
         tabla.setEditable(true);
 
         TableColumn<doctores, String> claveTabla = new TableColumn("Clave");
-        claveTabla.setCellValueFactory(new PropertyValueFactory<>("Clave"));
+        claveTabla.setCellValueFactory(new PropertyValueFactory<>("CveTer"));
         tabla.getColumns().addAll(claveTabla);
 
         TableColumn<doctores, String> nombreTabla = new TableColumn("Nombre");
-        nombreTabla.setCellValueFactory(new PropertyValueFactory<>("Clave"));
+        nombreTabla.setCellValueFactory(new PropertyValueFactory<>("Nombre"));
         tabla.getColumns().addAll(nombreTabla);
 
         TableColumn<doctores, String> sexoTabla = new TableColumn("Sexo");
@@ -88,8 +91,9 @@ public class terapeuta extends Stage implements EventHandler {
         tabla.getColumns().addAll(sexoTabla);
 
         TableColumn<doctores, String> EspecTabla = new TableColumn("Especialidad");
-        EspecTabla .setCellValueFactory(new PropertyValueFactory<>("Especilidad"));
+        EspecTabla .setCellValueFactory(new PropertyValueFactory<>("EspD"));
         tabla.getColumns().addAll(EspecTabla );
+        tabla.setItems(tDAO.SELECCIONAR());
 
 
 
@@ -100,6 +104,15 @@ public class terapeuta extends Stage implements EventHandler {
         Anadir.setText("Registrar Terapeuta");
         Anadir.setPadding(new Insets(20));
         Anadir.setMaxSize(350,10);
+        Anadir.setOnAction(Event ->{
+            tDAO.setCveTer(Integer.parseInt(clavText.getText()));
+            tDAO.setNombre(nombText.getText());
+            tDAO.setSexo(sexoText.getText());
+            tDAO.setCveEsp(Integer.parseInt(espText.getText()));
+            tDAO.INSERTAR();
+            tabla.setItems(tDAO.SELECCIONAR());
+            tabla.refresh();
+        });
 
         vBox.getChildren().addAll(clave, clavText, nombre, nombText, sexo, sexoText, especialidad, espText, Anadir);
         vBox.setSpacing(5);

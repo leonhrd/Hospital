@@ -10,13 +10,14 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sample.models.CirugiaDAO;
 
 
 public class cirugia extends Stage implements EventHandler {
 
     private HBox hBox;
     private VBox vBox;
-
+    private CirugiaDAO cDAO;
 
     private Label cvedocbl,idquirLbl,nssLbl, fechaLbl;
     private TextArea clavdoctxt, idquirText, nssText, fechaText;
@@ -28,6 +29,7 @@ public class cirugia extends Stage implements EventHandler {
 
 
     public cirugia() {
+        cDAO = new CirugiaDAO();
         crearInterfaz();
         this.setTitle("Cirugías");
         this.setScene(escena);
@@ -74,11 +76,11 @@ public class cirugia extends Stage implements EventHandler {
         tabla.setEditable(true);
 
         TableColumn<doctores, String> claveDocTabla = new TableColumn("Clave de doctor");
-        claveDocTabla.setCellValueFactory(new PropertyValueFactory<>("Clave de doctor"));
+        claveDocTabla.setCellValueFactory(new PropertyValueFactory<>("CveDoctor"));
         tabla.getColumns().addAll(claveDocTabla);
 
         TableColumn<doctores, String> quirofanoTabla = new TableColumn("Quirofano");
-        quirofanoTabla.setCellValueFactory(new PropertyValueFactory<>("Quirofano"));
+        quirofanoTabla.setCellValueFactory(new PropertyValueFactory<>("IdQuir"));
         tabla.getColumns().addAll(quirofanoTabla);
 
         TableColumn<doctores, String> nssTabla = new TableColumn("NSS Paciente");
@@ -88,12 +90,21 @@ public class cirugia extends Stage implements EventHandler {
         TableColumn<doctores, String> fechaTabla = new TableColumn("Fecha");
         fechaTabla .setCellValueFactory(new PropertyValueFactory<>("Fecha"));
         tabla.getColumns().addAll(fechaTabla );
-
+        tabla.setItems(cDAO.SELECCIONAR());
 
         Anadir = new Button();
         Anadir.setText("Programar cirugía");
         Anadir.setPadding(new Insets(20));
         Anadir.setMaxSize(350,10);
+        Anadir.setOnAction(Event ->{
+            cDAO.setCveDoctor(Integer.parseInt(clavdoctxt.getText()));
+            cDAO.setIdQuir(Integer.parseInt(idquirText.getText()));
+            cDAO.setNSS(Integer.parseInt(nssText.getText()));
+            cDAO.setFecha(fechaText.getText());
+            cDAO.INSERTAR();
+            tabla.setItems(cDAO.SELECCIONAR());
+            tabla.refresh();
+        });
 
         vBox.getChildren().addAll(cvedocbl,clavdoctxt,idquirLbl,idquirText,nssLbl,nssText,fechaLbl,fechaText, Anadir);
         vBox.setSpacing(5);

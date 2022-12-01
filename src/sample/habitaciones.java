@@ -10,6 +10,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import sample.models.HabitacionesDAO;
 
 
 public class habitaciones extends Stage implements EventHandler {
@@ -17,8 +18,10 @@ public class habitaciones extends Stage implements EventHandler {
     private VBox vBox;
     private Scene escena;
     private TableView tabla;
+    private HabitacionesDAO hDAO;
 
     public habitaciones() {
+        hDAO = new HabitacionesDAO();
         creaInterfaz();
 
         this.setTitle("Habitaciones ");
@@ -41,20 +44,21 @@ public class habitaciones extends Stage implements EventHandler {
         tabla.setEditable(true);
 
         TableColumn<doctores, String> IdPlantaTabla = new TableColumn("Planta");
-        IdPlantaTabla.setCellValueFactory(new PropertyValueFactory<>("Planta"));
+        IdPlantaTabla.setCellValueFactory(new PropertyValueFactory<>("IdPlanta"));
         tabla.getColumns().addAll(IdPlantaTabla);
 
         TableColumn<doctores, String> IdCuartoTabla = new TableColumn("Cuarto");
-        IdCuartoTabla.setCellValueFactory(new PropertyValueFactory<>("Cuarto"));
+        IdCuartoTabla.setCellValueFactory(new PropertyValueFactory<>("IdCuarto"));
         tabla.getColumns().addAll(IdCuartoTabla);
 
         TableColumn<doctores, String> IdCamaTabla = new TableColumn("Id cama");
-        IdCamaTabla.setCellValueFactory(new PropertyValueFactory<>("Id cama"));
+        IdCamaTabla.setCellValueFactory(new PropertyValueFactory<>("IdCama"));
         tabla.getColumns().addAll(IdCamaTabla);
 
         TableColumn<doctores, String> CamaTabla = new TableColumn("No. Cama");
-        CamaTabla.setCellValueFactory(new PropertyValueFactory<>("No. Cama"));
+        CamaTabla.setCellValueFactory(new PropertyValueFactory<>("NoCama"));
         tabla.getColumns().addAll(CamaTabla);
+        tabla.setItems(hDAO.SELECCIONAR());
 
 
 
