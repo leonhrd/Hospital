@@ -24,7 +24,7 @@ public class Main extends Application {
     private MenuItem ingDoc, ingTer;
     private MenuItem regrPaciente, rehbPacientes;
     private MenuItem Cargos, Turnos;
-    private MenuItem ProCirug;
+    private MenuItem ProCirug,conCirug;
     private MenuItem habitaciones;
 
     private HBox hBox;
@@ -66,6 +66,8 @@ public class Main extends Application {
 
        ProCirug = new MenuItem("Programar cirugía");
        ProCirug.setOnAction(event -> EventosCirugia(1));
+       conCirug = new MenuItem("Consultar cirugia");
+       conCirug.setOnAction(event -> EventosCirugia(2));
 
         habitaciones = new MenuItem("Ver habitaciones");
         habitaciones.setOnAction(event -> EventosHabitacion(1));
@@ -80,7 +82,7 @@ public class Main extends Application {
         Doctores.getItems().addAll(ingDoc, ingTer);
         Pacientes.getItems().addAll(regrPaciente,rehbPacientes);
         Puestos.getItems().addAll(Cargos,Turnos);
-        Cirugias.getItems().addAll(ProCirug);
+        Cirugias.getItems().addAll(ProCirug, conCirug);
         Habitacion.getItems().addAll(habitaciones);
 
 
@@ -132,12 +134,14 @@ public class Main extends Application {
         switch (i)
         {
             case 1: new cirugia();break;
+            case 2: new consultarCirugia(); break;
         }
     }
 
     private void EventosHabitacion(int i ){
         switch (i){
             case 1:new habitaciones(); break;
+
         }
     }
 
