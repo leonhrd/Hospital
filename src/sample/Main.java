@@ -13,6 +13,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import sample.models.conexion;
+
+import javax.swing.*;
 //import sample.models.conexion;
 
 
@@ -34,6 +36,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
+        String clave =  (String) JOptionPane.showInputDialog(null, "contraseña de base datos");
 
 
         vBox=new VBox();
@@ -105,7 +108,7 @@ public class Main extends Application {
         primaryStage.show();
 
 
-        conexion.crearConexion();
+        conexion.crearConexion(clave);
     }
 
     private void EventosDoctores(int i){
