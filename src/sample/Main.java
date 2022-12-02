@@ -10,6 +10,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import sample.models.conexion;
 //import sample.models.conexion;
@@ -90,8 +91,8 @@ public class Main extends Application {
         vBox.getChildren().addAll(MenuBarras);
 
 
-
        Scene escena = new Scene (vBox,1280,720);
+
 
         Image logo = new Image("sample/Images/logodehospital.png");
         primaryStage.getIcons().add(logo);

@@ -168,7 +168,7 @@ public class pacientes extends Stage implements EventHandler {
         DarAlta.setMaxSize(300,1);
         DarAlta.setOnAction(event1 -> {                  });
 
-        vBox2.getChildren().addAll(Anadir,DarAlta);
+        vBox2.getChildren().addAll(Anadir);
         //vBox2.setSpacing(1);
 
         vBox.getChildren().addAll(nss,nssText, nombre,nombText,sexo,sexoText,Idpaciente,IdpacienteText,FechaNac,FechaNacText,IdHist,IdHistText,IdPlanta,IdPlantaText,cveRehab,cveRehabText,IdCama,IdCamaText,IdCuarto,IdCuartoText);
