@@ -75,4 +75,29 @@ public class CirugiaDAO {
         return listaC;
 
     }
+
+    public ObservableList<CirugiaDAO> SELECCIONARF(String e1){
+
+        ObservableList<CirugiaDAO> listaC = FXCollections.observableArrayList();
+        CirugiaDAO objC;
+        String query = "select * from cirugia where fecha = '"+e1+"'";
+        //System.out.println(query);
+        try {
+            Statement stmt = conexion.conexion.createStatement();
+            ResultSet res = stmt.executeQuery(query);
+            while( res.next() ){
+                objC = new CirugiaDAO();
+                objC.setCveDoctor(res.getInt("CveDoctor"));
+                objC.setIdQuir(res.getInt("IdQuir"));
+                objC.setNSS(res.getInt("NSS"));
+                //objC.setCveEsp(res.getInt("CveEsp"));
+                objC.setFecha(res.getString("Fecha"));
+                listaC.add(objC);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listaC;
+
+    }
 }

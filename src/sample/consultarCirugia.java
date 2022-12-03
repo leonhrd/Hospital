@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import sample.models.TurnoDAO;
+import sample.models.CirugiaDAO;
 
 
 public class consultarCirugia extends Stage implements EventHandler {
@@ -22,10 +22,11 @@ public class consultarCirugia extends Stage implements EventHandler {
     private TextArea fechaText;
     private Button botonBuscar;
     private TableView tabla;
+    private CirugiaDAO cDAO;
 
 
     public consultarCirugia() {
-
+        cDAO = new CirugiaDAO();
         creaInterfaz();
 
         this.setTitle("Busqueda de cirugía");
@@ -68,15 +69,15 @@ public class consultarCirugia extends Stage implements EventHandler {
 
 
         TableColumn<doctores, String> claveTabla = new TableColumn("Clave del doctor");
-        claveTabla.setCellValueFactory(new PropertyValueFactory<>("Clave del doctor"));
+        claveTabla.setCellValueFactory(new PropertyValueFactory<>("CveDoctor"));
         tabla.getColumns().addAll(claveTabla);
 
         TableColumn<doctores, String> quirofanoTabla = new TableColumn("id. quirofano");
-        quirofanoTabla.setCellValueFactory(new PropertyValueFactory<>("id. quirofano"));
+        quirofanoTabla.setCellValueFactory(new PropertyValueFactory<>("IdQuir"));
         tabla.getColumns().addAll(quirofanoTabla);
 
         TableColumn<doctores, String> nssTabla = new TableColumn("Nss");
-        nssTabla.setCellValueFactory(new PropertyValueFactory<>("Nss"));
+        nssTabla.setCellValueFactory(new PropertyValueFactory<>("NSS"));
         tabla.getColumns().addAll(nssTabla);
 
 
@@ -85,6 +86,10 @@ public class consultarCirugia extends Stage implements EventHandler {
         vBox.getChildren().addAll(fechalbl, fechaText, botonBuscar);
         botonBuscar.setMaxSize(150,1);
         botonBuscar.setText("Buscar cirugia");
+        botonBuscar.setOnAction(Event ->{
+            tabla.setItems(cDAO.SELECCIONARF(fechaText.getText()));
+            tabla.refresh();
+        });
 
         vBox2.getChildren().addAll(tabla);
         hBox.getChildren().addAll(vBox,vBox2);
